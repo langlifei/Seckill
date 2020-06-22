@@ -27,8 +27,10 @@ public class CodeMsg {
     public static CodeMsg MOBILE_NOT_EXITS = new CodeMsg(500214,"手机号不存在");
     public static CodeMsg PASSWORD_ERROR = new CodeMsg(500215,"用户密码错误");
     //服务端异常
+    //秒杀模块异常 5005xx
+    public static CodeMsg MIAO_SHA_OVER = new CodeMsg(500500,"商品已经秒杀完毕");
+    public static CodeMsg REPEAT_MIAO_SHA = new CodeMsg(500501,"不能重复秒杀");
 
-    //秒杀模块异常
 
     public Integer getCode() {
         return code;

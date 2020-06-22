@@ -55,7 +55,6 @@ public class MiaoshaUserServiceImp implements MiaoshaUserService {
         return true;
     }
 
-
     public void addCookieToken(HttpServletResponse response,String token,MiaoshaUser miaoshaUser){
         Cookie cookie = new Cookie(COOKIE_TOKEN,token);
         redisService.set(MiaoshaUserkey.TOKEN,token,miaoshaUser);

@@ -31,7 +31,7 @@ public abstract class BasePrefix implements KeyPrefix {
     public String getPrefix() {
         //这里的getClass获取的是子类的类对象
         String className = getClass().getSimpleName();
-        return className+":"+prefix;
+        return className+":"+prefix+":";
     }
 
 }

@@ -42,7 +42,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         String paramToken = request.getParameter(MiaoshaUserServiceImp.COOKIE_TOKEN);
         String cookieToken = getCookieValue(request);
         if(StringUtils.isEmpty(cookieToken)&&StringUtils.isEmpty(paramToken))
-            return "login";
+            return null;
         String token = !StringUtils.isEmpty(paramToken)?paramToken:cookieToken;//cookieToken优先级低一点
         MiaoshaUser miaoshaUser = miaoshaUserService.getByToken(response,token);
         return miaoshaUser;

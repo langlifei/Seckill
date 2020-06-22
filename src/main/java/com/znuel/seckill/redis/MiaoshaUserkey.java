@@ -8,7 +8,7 @@ package com.znuel.seckill.redis;
 
 public class MiaoshaUserkey extends BasePrefix{
 
-    private static final int TOKEN_EXPIRE_TIME = 24*60*60*2;
+    private static final int TOKEN_EXPIRE_TIME = 5*60;
 
     public MiaoshaUserkey(String prefix) {
         super(prefix);
