@@ -1,0 +1,33 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    enabled: true
+    encoding: utf-8
+    mode: HTML5
+  datasource:
+    url: jdbc:mysql://localhost:3306/seckill?serverTimezone=GMT%2B8&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  # 配置redis
+  redis:
+    host: 39.98.226.106
+    # Redis服务器连接端口
+    port: 6379
+    # 连接超时时间（毫秒）
+    timeout: 3
+    password: 123456
+    poolMaxTotal: 10
+    poolMaxIdle: 10
+    poolMaxWait: 3
+mybatis:
+  type-aliases-package: com.znuel.seckill.domain
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 3000
+  mapper-locations: classpath:com/znuel/seckill/dao/mapper/*.xml
+
