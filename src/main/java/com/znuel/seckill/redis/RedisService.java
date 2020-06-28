@@ -40,6 +40,22 @@ public class RedisService {
         }
     }
 
+
+    /*
+         删除
+     */
+    public <T> boolean delete(KeyPrefix keyPrefix ,String key){
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            String realKey = keyPrefix.getPrefix()+key;
+            Long del = jedis.del(realKey);
+            return del>0;
+        }finally {
+            //由于使用池化技术，使用完需要释放连接资源，否则很快会被耗空
+            returnToResource(jedis);
+        }
+    }
     /*
         设置对象
      */
@@ -65,7 +81,7 @@ public class RedisService {
     /*
         将bean转换为字符串
      */
-    private <T> String beanToString(T value) {
+    public static  <T> String beanToString(T value) {
         if(value==null)
             return null;
         Class<?> clazz = value.getClass();
@@ -84,7 +100,7 @@ public class RedisService {
      * @param <T>
      * @return
      */
-    private <T> T stringToBean(String str, Class<T> clazz) {
+    public static  <T> T stringToBean(String str, Class<T> clazz) {
         if(str == null || str.length()<=0|| clazz == null)
             return null;
         else if(clazz == Integer.class|| clazz == int.class)

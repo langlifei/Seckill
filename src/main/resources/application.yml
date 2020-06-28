@@ -23,6 +23,38 @@ spring:
     poolMaxTotal: 10
     poolMaxIdle: 10
     poolMaxWait: 3
+  #配置rabbitmq
+  rabbitmq:
+    host: 39.98.226.106
+    port: 5672
+    username: root
+    password: 123456
+    virtual-host: /
+    listener:
+      simple:
+        concurrency: 10 #消费者数量
+        max-concurrency: 10
+        prefetch: 1 #消费者从队列取的消息个数
+        auto-startup: true
+        default-requeue-rejected: true #消费失败后允许重试
+    template:
+      retry:
+        enabled: true # 允许发送者重试
+        initial-interval: 1000 # 1秒后重试
+        max-attempts: 3 # 最多重试3次
+        max-interval: 10000
+        multiplier: 1.0 # 如果为2表名第一次等1秒，第二次等2秒，第三次等4秒。。。。。
+  #资源静态化
+  resources:
+    add-mappings: true
+    static-locations: classpath:/static/
+    chain:
+      cache: true
+      enabled: true
+      compressed: true
+      html-application-cache: true
+    cache:
+      period: 3600
 mybatis:
   type-aliases-package: com.znuel.seckill.domain
   configuration:

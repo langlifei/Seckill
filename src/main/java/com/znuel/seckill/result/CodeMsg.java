@@ -26,6 +26,8 @@ public class CodeMsg {
     public static CodeMsg MOBILE_ERROR = new CodeMsg(500213,"手机号格式错误");
     public static CodeMsg MOBILE_NOT_EXITS = new CodeMsg(500214,"手机号不存在");
     public static CodeMsg PASSWORD_ERROR = new CodeMsg(500215,"用户密码错误");
+    //订单模块 5004XX
+    public static CodeMsg ORDER_NOT_EXIST = new CodeMsg(500400, "订单不存在");
     //服务端异常
     //秒杀模块异常 5005xx
     public static CodeMsg MIAO_SHA_OVER = new CodeMsg(500500,"商品已经秒杀完毕");

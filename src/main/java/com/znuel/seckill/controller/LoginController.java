@@ -1,6 +1,7 @@
 package com.znuel.seckill.controller;
 
 import com.znuel.seckill.domain.MiaoshaUser;
+import com.znuel.seckill.rabbitmq.MQSender;
 import com.znuel.seckill.result.CodeMsg;
 import com.znuel.seckill.result.Result;
 import com.znuel.seckill.service.MiaoshaUserService;
@@ -27,6 +28,9 @@ public class LoginController {
 
     @Autowired
     private MiaoshaUserService miaoshaUserService;
+    @Autowired
+    MQSender sender;
+
 
     @RequestMapping("/to_login")
     public String to_login(){
@@ -39,5 +43,12 @@ public class LoginController {
         // 执行登录
         miaoshaUserService.login(response,loginVo);
         return Result.success(true);
+    }
+
+    @RequestMapping("/mq")
+    @ResponseBody
+    public Result<String> test(){
+        sender.send("Hello RabbitMQ");
+        return Result.success("Hello world");
     }
 }

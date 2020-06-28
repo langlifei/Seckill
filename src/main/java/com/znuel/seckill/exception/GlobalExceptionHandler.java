@@ -31,13 +31,13 @@ public class GlobalExceptionHandler {
             //删除最后的逗号
             stringBuilder.deleteCharAt(stringBuilder.length()-1);
         CodeMsg codeMsg = CodeMsg.BIND_EXCEPTION.fillArgs(stringBuilder.toString());
-        return Result.errorCode(codeMsg);
+        return Result.error(codeMsg);
      }
 
      //处理自定义异常
     @ExceptionHandler({GlobalException.class})
     public Result<String> globalExceptionHandler(GlobalException ge){
         CodeMsg codeMsg = ge.getCodeMsg();
-        return Result.errorCode(codeMsg);
+        return Result.error(codeMsg);
     }
 }

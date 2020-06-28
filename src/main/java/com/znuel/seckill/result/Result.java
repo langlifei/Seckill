@@ -26,7 +26,7 @@ public class Result<T> {
         return new Result<>(0,"success",data);
     }
 
-    public static <T> Result<T> errorCode(CodeMsg codMsg){
+    public static <T> Result<T> error(CodeMsg codMsg){
         return new Result<>(codMsg.getCode(),codMsg.getMsg());
     }
 
