@@ -2,6 +2,7 @@ package com.znuel.seckill.exception;
 
 import com.znuel.seckill.result.CodeMsg;
 import com.znuel.seckill.result.Result;
+import org.springframework.amqp.rabbit.support.ListenerExecutionFailedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -38,6 +39,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({GlobalException.class})
     public Result<String> globalExceptionHandler(GlobalException ge){
         CodeMsg codeMsg = ge.getCodeMsg();
+        return Result.error(codeMsg);
+    }
+
+    //处理主键冲突异常
+    @ExceptionHandler({ListenerExecutionFailedException.class})
+    public Result listenerExceptionHandler(){
+        CodeMsg codeMsg = CodeMsg.REPEAT_MIAO_SHA;
         return Result.error(codeMsg);
     }
 }

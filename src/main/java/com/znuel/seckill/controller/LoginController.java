@@ -45,10 +45,4 @@ public class LoginController {
         return Result.success(true);
     }
 
-    @RequestMapping("/mq")
-    @ResponseBody
-    public Result<String> test(){
-        sender.send("Hello RabbitMQ");
-        return Result.success("Hello world");
-    }
 }

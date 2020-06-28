@@ -25,11 +25,8 @@ public class OrderService {
     @Autowired
     RedisService redisService;
 
-    public MiaoshaOrder getMiaoshaOrderByUserIdGoodsId(Long id, long goodsId) {
-        MiaoshaOrder miaoshaOrder = redisService.get(OrderKey.getMiaoshaOrderByUidGid,""+id+"_"+goodsId,MiaoshaOrder.class);
-        if(miaoshaOrder==null)
-            miaoshaOrder = orderDao.getMiaoshaOrderByUserIdGoodsId(id,goodsId);
-        return miaoshaOrder;
+    public MiaoshaOrder getMiaoshaOrderByUserIdGoodsId(Long userId, long goodsId) {
+       return redisService.get(OrderKey.getMiaoshaOrderByUidGid,""+userId+"_"+goodsId,MiaoshaOrder.class);
     }
 
     public OrderInfo createOrder(MiaoshaUser miaoshaUser, GoodsVo goodsVo) {

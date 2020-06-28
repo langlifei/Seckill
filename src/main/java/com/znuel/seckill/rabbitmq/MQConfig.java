@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MQConfig {
-    public static final String QUEUE = "queue";
+    public static final String QUEUE = "Miaosha_Queue";
 
     @Bean
     public Queue queue(){

@@ -15,5 +15,5 @@ public class OrderKey extends BasePrefix {
         super(prefix, expireSecond);
     }
 
-    public final static OrderKey getMiaoshaOrderByUidGid = new OrderKey("miaoshaUinAndGid",60*10);
+    public final static OrderKey getMiaoshaOrderByUidGid = new OrderKey("miaoshaUinAndGid");
 }

@@ -17,4 +17,5 @@ public class GoodsKey extends BasePrefix {
 
     public static GoodsKey getGoodsList = new GoodsKey("goodsList",60);
     public static GoodsKey getGoodsDetail = new GoodsKey("goodsDetail",60);
+    public static GoodsKey getMiaoshaGoodsStock = new GoodsKey("goodStock");
 }
