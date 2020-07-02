@@ -7,6 +7,7 @@ import com.znuel.seckill.domain.OrderInfo;
 import com.znuel.seckill.rabbitmq.MQSender;
 import com.znuel.seckill.rabbitmq.MiaoshaMessage;
 import com.znuel.seckill.redis.GoodsKey;
+import com.znuel.seckill.redis.MiaoshaKey;
 import com.znuel.seckill.redis.RedisService;
 import com.znuel.seckill.result.CodeMsg;
 import com.znuel.seckill.result.Result;
@@ -72,12 +73,17 @@ public class MiaoshaController implements InitializingBean {
     @PostMapping("/{path}/do_miaosha")
     @ResponseBody
     public Result<Integer> do_miaosha(MiaoshaUser miaoshaUser,
-                                        @RequestParam("goodsId")long goodsId,@PathVariable("path")String path){
+                                        @RequestParam("goodsId")long goodsId,
+                                      @PathVariable(value = "path")String path){
         if(miaoshaUser==null)
             return Result.error(CodeMsg.SERVER_ERROR);
         boolean check = miaoshaService.checkPath(miaoshaUser,goodsId,path);
         if(!check)
             return Result.error(CodeMsg.REQUEST_ILLEGAL);
+        //判断是否为3秒内的重复请求
+        Long flag = redisService.setNX(MiaoshaKey.isRepeatRequest,""+miaoshaUser.getId()+"_"+goodsId,1);
+        if(flag==0)
+            return Result.error(CodeMsg.REQUEST_OVER_FREQUENCE);
         if(isOver.get(""+goodsId)==null || isOver.get(""+goodsId))
             return Result.error(CodeMsg.MIAO_SHA_OVER);
         //读取redis中的库存信息

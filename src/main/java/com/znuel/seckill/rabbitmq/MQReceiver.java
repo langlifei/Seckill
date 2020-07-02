@@ -3,6 +3,7 @@ package com.znuel.seckill.rabbitmq;
 import com.znuel.seckill.domain.MiaoshaOrder;
 import com.znuel.seckill.domain.MiaoshaUser;
 import com.znuel.seckill.domain.OrderInfo;
+import com.znuel.seckill.redis.GoodsKey;
 import com.znuel.seckill.redis.RedisService;
 import com.znuel.seckill.result.CodeMsg;
 import com.znuel.seckill.result.Result;
@@ -28,6 +29,8 @@ public class MQReceiver {
     GoodsService goodsService;
     @Autowired
     OrderService orderService;
+    @Autowired
+    RedisService redisService;
 
     @RabbitListener(queues = MQConfig.QUEUE)
     public void receive(String message){
@@ -44,6 +47,8 @@ public class MQReceiver {
         if(stock<=0)
             return;
         //减库存->写入订单表->写入秒杀订单表
-        miaoshaService.miaosha(miaoshaUser,goodsVo);
+        if(miaoshaService.miaosha(miaoshaUser,goodsVo)!=null)
+            //下单成功后减数据库缓存,不能放在数据库操作里，因为数据库可能回归，redis回滚不了。
+            redisService.decr(GoodsKey.getMiaoshaGoodsStock,""+goodsVo.getId());
     }
 }

@@ -4,6 +4,7 @@ import com.znuel.seckill.domain.MiaoshaOrder;
 import com.znuel.seckill.domain.MiaoshaUser;
 import com.znuel.seckill.domain.OrderInfo;
 import com.znuel.seckill.exception.GlobalException;
+import com.znuel.seckill.redis.GoodsKey;
 import com.znuel.seckill.redis.MiaoshaKey;
 import com.znuel.seckill.redis.RedisService;
 import com.znuel.seckill.result.CodeMsg;

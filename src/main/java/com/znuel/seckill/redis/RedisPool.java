@@ -25,7 +25,7 @@ public class RedisPool {
         jedisPoolConfig.setMaxIdle(redisConfig.getPoolMaxIdle());
         jedisPoolConfig.setMaxTotal(redisConfig.getPoolMaxTotal());
         jedisPoolConfig.setMaxWaitMillis(redisConfig.getPoolMaxWait()*1000);
-        JedisPool jedisPool = new JedisPool(jedisPoolConfig,redisConfig.getHost(),redisConfig.getPort(),redisConfig.getTimeout()*1000,redisConfig.getPassword());
+        JedisPool jedisPool = new JedisPool(jedisPoolConfig,redisConfig.getHost(),redisConfig.getPort(),redisConfig.getTimeout()*1000,redisConfig.getPassword());//没有密码
         return jedisPool;
     }
 }

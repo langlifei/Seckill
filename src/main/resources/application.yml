@@ -6,29 +6,23 @@ spring:
     enabled: true
     encoding: utf-8
     mode: HTML5
-  datasource:
-    url: jdbc:mysql://localhost:3306/seckill?serverTimezone=GMT%2B8&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
   # 配置redis
   redis:
-    host: 39.98.226.106
+    host: 192.168.126.138
     # Redis服务器连接端口
     port: 6379
     # 连接超时时间（毫秒）
-    timeout: 3
-    password: 123456
-    poolMaxTotal: 10
-    poolMaxIdle: 10
-    poolMaxWait: 3
+    timeout: 3000
+    password:
+    poolMaxTotal: 1000
+    poolMaxIdle: 500
+    poolMaxWait: 500
   #配置rabbitmq
   rabbitmq:
-    host: 39.98.226.106
+    host: 192.168.126.138
     port: 5672
-    username: root
-    password: 123456
+    username: guest
+    password: guest
     virtual-host: /
     listener:
       simple:
@@ -62,4 +56,6 @@ mybatis:
     default-fetch-size: 100
     default-statement-timeout: 3000
   mapper-locations: classpath:com/znuel/seckill/dao/mapper/*.xml
+
+
 

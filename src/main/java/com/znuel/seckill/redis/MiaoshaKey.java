@@ -19,6 +19,7 @@ public class MiaoshaKey extends BasePrefix {
     public static final MiaoshaKey isGoodOver = new MiaoshaKey("goodsOver");
     public static final MiaoshaKey getMiaoshaPath = new MiaoshaKey("miaoshaPath",60);
     public static final MiaoshaKey getMiaoshaVerifyCode = new MiaoshaKey("verifyCode",3*60);
+    public static final MiaoshaKey isRepeatRequest = new MiaoshaKey("repeatRequest",3);
     public static MiaoshaKey overClick(int expireSecond){
         return new MiaoshaKey("overClick",expireSecond);
     }

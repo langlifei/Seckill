@@ -41,6 +41,25 @@ public class RedisService {
     }
 
 
+    public <T> Long setNX(KeyPrefix keyPrefix,String key,T value){
+            Jedis jedis = null;
+            Long flag = null;
+            try {
+                jedis = jedisPool.getResource();
+                String str = beanToString(value);
+                if(str==null||str.length()<=0)
+                    return (long)0;
+                String realKey = keyPrefix.getPrefix()+key;
+                int expireSecond = keyPrefix.expireSeconds();
+                flag  = jedis.setnx(realKey,str);
+                if(expireSecond>0)
+                    jedis.expire(realKey,expireSecond);
+                return flag;
+            }finally {
+                returnToResource(jedis);
+            }
+    }
+
     /*
          删除
      */
